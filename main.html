@@ -1,0 +1,28 @@
+<form name="searchName">
+    <input type="search" required placeholder="User to find" ng-model="searchtxt.name" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th ng-click="userOrderByField='name'; userOrderReverseSort = !userOrderReverseSort">Name <span ng-show="userOrderByField == 'name'"><span ng-show="!userOrderReverseSort">^</span><span ng-show="userOrderReverseSort">v</span></span></th>
+            <th ng-click="userOrderByField='age'; userOrderReverseSort = !userOrderReverseSort">Age <span ng-show="userOrderByField == 'age'"><span ng-show="!userOrderReverseSort">^</span><span ng-show="userOrderReverseSort">v</span></span></th>
+            <th ng-click="userOrderByField='registered'; userOrderReverseSort = !userOrderReverseSort">Registered Date <span ng-show="userOrderByField == 'registered'"><span ng-show="!userOrderReverseSort">^</span><span ng-show="userOrderReverseSort">v</span></span></th>
+            <th ng-click="userOrderByField='email'; userOrderReverseSort = !userOrderReverseSort">Email <span ng-show="userOrderByField == 'email'"><span ng-show="!userOrderReverseSort">^</span><span ng-show="userOrderReverseSort">v</span></span></th>
+            <th ng-click="userOrderByField='balance'; userOrderReverseSort = !userOrderReverseSort">Balance <span ng-show="userOrderByField == 'balance'"><span ng-show="!userOrderReverseSort">^</span><span ng-show="userOrderReverseSort">v</span></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | filter:searchtxt | orderBy:userOrderByField:userOrderReverseSort">
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.registered | removeSpaces | date: 'dd-mm-yyyy dd:mm:ss' }}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.balance | removeCommas | currency:"£" }}</td>
+
+        </tr>        
+    </tbody>
+</table>
+
+<form name="resetBal">
+    <input type="button" value="Reset Balance" ng-click="resetBalance()" />
+</form>
